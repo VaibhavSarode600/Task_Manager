@@ -1,0 +1,57 @@
+    <div class="container">
+        <section class="page-header">
+            <h2 class="page-title">
+                <span class="title-icon">➕</span>
+                Add New Task
+            </h2>
+            <p class="page-description">Create a new task by filling out the form below. Only the title is required.</p>
+        </section>
+
+        <section class="form-container">
+            <form (ngSubmit)="onSubmit()" #taskForm="ngForm" class="task-form">
+                <div class="form-group">
+                    <label for="title" class="form-label">
+                        <span class="label-icon">📝</span>
+                        Task Title
+                        <span class="required">*</span>
+                    </label>
+                    <input type="text" id="title" name="title" [(ngModel)]="task.title" required
+                        placeholder="Enter a clear, descriptive title" class="form-input" #titleInput="ngModel">
+                    <div class="help-text">A clear, descriptive title for your task</div>
+                    <div *ngIf="titleInput.invalid" class="error-message">
+                        Task title is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="form-label">
+                        <span class="label-icon">📄</span>
+                        Description
+                    </label>
+                    <textarea id="description" name="description" [(ngModel)]="task.description" required
+                        placeholder="Enter task description (optional)" class="form-textarea" rows="5"></textarea>
+                    <div class="help-text">Add any additional details or notes about this task</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="due-date" class="form-label">
+                        <span class="label-icon">📅</span>
+                        Due Date
+                    </label>
+                    <input type="date" id="due-date" name="dueDate" [(ngModel)]="task.dueDate" class="form-input">
+                    <div class="help-text">Set a deadline for this task (optional)</div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" [disabled]="!taskForm.form.valid">
+                        <span class="btn-icon">✨</span>
+                        Create Task
+                    </button>
+                    <button type="button" (click)="goBack()" class="btn btn-secondary">
+                        <span class="btn-icon">↩️</span>
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>

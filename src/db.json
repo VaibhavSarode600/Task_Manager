@@ -1,0 +1,40 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Complete project documentation and new values also",
+      "description": "Write comprehensive documentation for the project including setup instructions, API documentation, and user guides. Include examples and troubleshooting sections.\n\nKey areas to cover:\n• Installation and setup guide\n• API reference with examples\n• User manual with screenshots\n• Troubleshooting section\n• Contributing guidelines\n• Installation and setup guide\n• API reference with examples\n• User manual with screenshots\n• Troubleshooting section\n• Contributing guidelines\n",
+      "dueDate": "2025-08-29",
+      "status": "completed",
+      "createdDate": "2025-08-12",
+      "lastModified": "2025-08-13"
+    },
+    {
+      "id": "2",
+      "title": "Review code changes",
+      "description": "Review the latest pull requests and provide feedback on code quality, performance improvements, and security considerations.",
+      "dueDate": "2025-08-15",
+      "status": "completed",
+      "createdDate": "2025-08-10",
+      "lastModified": "2025-08-12"
+    },
+    {
+      "id": "3",
+      "title": "Update website content",
+      "description": "Update the company website with new product features, testimonials, and pricing information.",
+      "dueDate": "2025-08-25",
+      "status": "pending",
+      "createdDate": "2025-08-11",
+      "lastModified": "2025-08-11"
+    },
+    {
+      "id": "86d0",
+      "title": "Create React Application",
+      "description": "react Application",
+      "dueDate": "2025-09-18",
+      "status": "pending",
+      "createdDate": "2025-09-02",
+      "lastModified": "2025-09-02"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+ <div class="container">
+      <section class="page-header">
+        <div class="breadcrumb">
+          <a routerLink="/tasks" class="breadcrumb-link">📋 Task List</a>
+          <span class="breadcrumb-arrow">→</span>
+          <span class="breadcrumb-current">Task Detail</span>
+        </div>
+        <h2 class="page-title">
+          <span class="title-icon">📄</span>
+          Task Details
+        </h2>
+      </section>
+
+      <article class="task-detail" *ngIf="task">
+        <div class="task-header">
+          <h1 class="task-title">{{ task.title }}</h1>
+          
+          <div class="task-meta">
+            <div class="meta-item">
+              <span class="meta-label">
+                <span class="meta-icon">🎯</span>
+                Status
+              </span>
+              <span class="meta-value">
+                <span class="task-status" 
+                      [class.status-completed]="task.status === 'completed'"
+                      [class.status-pending]="task.status === 'pending'">
+                  <span class="status-icon">{{ task.status === 'completed' ? '✅' : '⏳' }}</span>
+                  {{ task.status | titlecase }}
+                </span>
+              </span>
+            </div>
+            
+            <div class="meta-item" *ngIf="task.dueDate">
+              <span class="meta-label">
+                <span class="meta-icon">📅</span>
+                Due Date
+              </span>
+              <span class="meta-value">{{ task.dueDate | date:'fullDate' }}</span>
+            </div>
+            
+            <div class="meta-item">
+              <span class="meta-label">
+                <span class="meta-icon">📝</span>
+                Created
+              </span>
+              <span class="meta-value">{{ task.createdDate | date:'mediumDate' }}</span>
+            </div>
+            
+            <div class="meta-item">
+              <span class="meta-label">
+                <span class="meta-icon">🔄</span>
+                Last Modified
+              </span>
+              <span class="meta-value">{{ task.lastModified | date:'mediumDate' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-content">
+          <div class="due-date-warning" *ngIf="task.dueDate && task.status === 'pending' && isUpcoming(task.dueDate)">
+            <h4>
+              <span class="warning-icon">⏰</span>
+              Upcoming Deadline
+            </h4>
+            <p>This task is due {{ getDaysUntilDue(task.dueDate) }}</p>
+          </div>
+
+          <section class="content-section" *ngIf="task.description">
+            <h3 class="section-title">
+              <span class="section-icon">📖</span>
+              Description
+            </h3>
+            <div class="section-content">{{ task.description }}</div>
+          </section>
+
+          <section class="content-section" *ngIf="!task.description">
+            <h3 class="section-title">
+              <span class="section-icon">📖</span>
+              Description
+            </h3>
+            <div class="section-content empty-content">No description provided for this task.</div>
+          </section>
+
+          <section class="content-section">
+            <h3 class="section-title">
+              <span class="section-icon">📊</span>
+              Task Progress
+            </h3>
+            <div class="section-content">
+              <div *ngIf="task.status === 'completed'" class="progress-completed">
+                <span class="progress-icon">🎉</span>
+                This task has been completed successfully!
+              </div>
+              <div *ngIf="task.status === 'pending'" class="progress-pending">
+                <span class="progress-icon">⚡</span>
+                This task is ready to work on. Consider breaking it down into smaller subtasks for better progress tracking.
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="task-actions">
+          <a [routerLink]="['/edit-task', task.id]" class="btn btn-primary">
+            <span class="btn-icon">✏️</span>
+            Edit Task
+          </a>
+          <button *ngIf="task.status === 'pending'" 
+                  (click)="toggleTaskStatus()" 
+                  class="btn btn-success">
+            <span class="btn-icon">✅</span>
+            Mark Complete
+          </button>
+          <button *ngIf="task.status === 'completed'" 
+                  (click)="toggleTaskStatus()" 
+                  class="btn btn-warning">
+            <span class="btn-icon">⏳</span>
+            Mark Pending
+          </button>
+          <a routerLink="/tasks" class="btn btn-secondary">
+            <span class="btn-icon">↩️</span>
+            Back to List
+          </a>
+          <button (click)="deleteTask()" class="btn btn-danger">
+            <span class="btn-icon">🗑️</span>
+            Delete Task
+          </button>
+        </div>
+      </article>
+
+      <div *ngIf="!task" class="error-state">
+        <div class="error-icon">❌</div>
+        <h3>Task Not Found</h3>
+        <p>The task you're looking for doesn't exist or may have been deleted.</p>
+        <a routerLink="/tasks" class="btn btn-primary">Go Back to Tasks</a>
+      </div>
+    </div>
